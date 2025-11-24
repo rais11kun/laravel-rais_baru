@@ -39,6 +39,7 @@
                         <table id="table-pelanggan" class="table table-centered table-nowrap mb-0 rounded">
                             <thead class="thead-light">
                                 <tr>
+                                    <th>No</th>
                                     <th class="border-0">First Name</th>
                                     <th class="border-0">Last Name</th>
                                     <th class="border-0">Birthday</th>
@@ -50,8 +51,9 @@
                             </thead>
                             <tbody>
                             <tbody>
-                                @foreach ($dataPelanggan as $item)
+                                @foreach ($dataPelanggan as $index => $item)
                                     <tr>
+                                        <td>{{ $dataPelanggan->firstItem() + $index}}</td>
                                         <td>{{ $item->first_name }}</td>
                                         <td>{{ $item->last_name }}</td>
                                         <td>{{ $item->birthday }}</td>
