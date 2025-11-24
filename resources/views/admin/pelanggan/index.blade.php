@@ -86,12 +86,6 @@
                                                     Hapus
                                                 </button>
                                             </form>
-
-                                            <table id="table-pelanggan">...</table>
-
-                                            <div class="mt-3">
-                                                {{ $dataPelanggan->links('pagination::bootstrap-5') }}
-                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -99,6 +93,9 @@
 
                             </tbody>
                         </table>
+                        <div class="mt-3">
+                            {{ $dataPelanggan->links('pagination::bootstrap-5') }}
+                        </div>
                     </div>
                 </div>
             </div>
