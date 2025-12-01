@@ -15,7 +15,8 @@
                         </svg>
                     </a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{ route('pelanggan.update', $dataPelanggan->pelanggan_id)}}">Pelanggan</a></li>
+                <li class="breadcrumb-item"><a
+                        href="{{ route('pelanggan.update', $dataPelanggan->pelanggan_id) }}">Pelanggan</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Edit Pelanggan</li>
             </ol>
         </nav>
@@ -25,7 +26,8 @@
                 <p class="mb-0">Form untuk menambahkan data pelanggan baru.</p>
             </div>
             <div>
-                <a href="{{ route('pelanggan.index') }}" class="btn btn-primary"><i class="far fa-question-circle me-1"></i> Kembali</a>
+                <a href="{{ route('pelanggan.index') }}" class="btn btn-primary"><i class="far fa-question-circle me-1"></i>
+                    Kembali</a>
             </div>
         </div>
     </div>
@@ -42,13 +44,15 @@
                                 <!-- First Name -->
                                 <div class="mb-3">
                                     <label for="first_name" class="form-label">First name</label>
-                                    <input type="text" id="first_name" name="first_name" class="form-control" required value="{{ $dataPelanggan->first_name }}">
+                                    <input type="text" id="first_name" name="first_name" class="form-control" required
+                                        value="{{ $dataPelanggan->first_name }}">
                                 </div>
 
                                 <!-- Last Name -->
                                 <div class="mb-3">
                                     <label for="last_name" class="form-label">Last name</label>
-                                    <input type="text" id="last_name"  name="last_name" class="form-control" required value="{{ $dataPelanggan->last_name }}">
+                                    <input type="text" id="last_name" name="last_name" class="form-control" required
+                                        value="{{ $dataPelanggan->last_name }}">
                                 </div>
                             </div>
 
@@ -56,28 +60,47 @@
                                 <!-- Birthday -->
                                 <div class="mb-3">
                                     <label for="birthday" class="form-label">Birthday</label>
-                                    <input type="date" id="birthday"  name="birthday" class="form-control" value="{{ $dataPelanggan->birthday }}">
+                                    <input type="date" id="birthday" name="birthday" class="form-control"
+                                        value="{{ $dataPelanggan->birthday }}">
                                 </div>
 
                                 <!-- Gender -->
-                                 <select class="form-select mb-0" id="gender" name="gender" aria-label="Gender select example">
-                                        <option selected>Gender</option>
-                                        <option value="Female" {{ $dataPelanggan->gender == 'Female' ? 'selected' : '' }}>Female</option>
-                                        <option value="Male" {{ $dataPelanggan->gender == 'Male' ? 'selected' : '' }}>Male</option>
-                                    </select>
+                                <select class="form-select mb-0" id="gender" name="gender"
+                                    aria-label="Gender select example">
+                                    <option selected>Gender</option>
+                                    <option value="Female" {{ $dataPelanggan->gender == 'Female' ? 'selected' : '' }}>Female
+                                    </option>
+                                    <option value="Male" {{ $dataPelanggan->gender == 'Male' ? 'selected' : '' }}>Male
+                                    </option>
+                                </select>
                             </div>
 
                             <div class="col-lg-4 col-sm-12">
                                 <!-- Email -->
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="text" id="email" name="email" class="form-control" required value="{{ $dataPelanggan->email }}">
+                                    <input type="text" id="email" name="email" class="form-control" required
+                                        value="{{ $dataPelanggan->email }}">
                                 </div>
 
                                 <!-- Phone -->
                                 <div class="mb-3">
                                     <label for="phone" class="form-label">Phone</label>
-                                    <input type="text" id="phone"  name="phone" class="form-control" value="{{ $dataPelanggan->phone }}">
+                                    <input type="text" id="phone" name="phone" class="form-control"
+                                        value="{{ $dataPelanggan->phone }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="role">Pilih Role</label>
+                                    <select name="role" id="role" class="form-control" required>
+                                        <option value="">-- Pilih --</option>
+                                        @foreach ($roles as $role)
+                                            {{-- Logika untuk otomatis memilih role yang sudah dimiliki pengguna --}}
+                                            <option value="{{ $role->name }}"
+                                                @if ($dataUser->hasRole($role->name)) selected @endif>
+                                                {{ $role->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <!-- Buttons -->

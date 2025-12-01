@@ -73,7 +73,8 @@
               <div class="card-header">
                 <div class="row align-items-center">
                   <div class="col">
-                    <h2 class="fs-5 fw-bold mb-0">Page visits</h2>
+                    <h2 class="fs-5 fw-bold mb-0"><Pa></Pa>
+                    <985></985>ge visits</h2>
                   </div>
                   <div class="col text-end">
                     <a href="#" class="btn btn-sm btn-primary">See all</a>

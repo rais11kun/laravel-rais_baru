@@ -80,6 +80,19 @@
                 </div>
             </div>
 
+            <div class="mb-3">
+                <label for="avatar">Ganti Foto (Kosongkan jika tidak ingin ganti)</label>
+                <input type="file" name="avatar" id="avatar" class="form-control">
+
+                {{-- Tampilkan Foto Saat Ini --}}
+                @if ($dataUser->avatar)
+                    <div class="mt-2">
+                        <small>Foto saat ini:</small>
+                        <img src="{{ asset('storage/' . $dataUser->avatar) }}" alt="Foto Profil" width="50">
+                    </div>
+                @endif
+            </div>
+
             <!-- Buttons -->
             <div class="row">
                 <div class="col-12 text-end"> {{-- col-12 agar memenuhi lebar dan text-end untuk rata kanan --}}

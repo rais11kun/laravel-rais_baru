@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-@section('title', 'Tambah User')
+@section('title', 'List User')
 @section('content')
 
     <div class="py-4">
@@ -15,14 +15,14 @@
                         </svg>
                     </a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{ route('user.create') }}">User</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('user.index') }}">User</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Tambah User</li>
             </ol>
         </nav>
         <div class="d-flex justify-content-between w-100 flex-wrap">
             <div class="mb-3 mb-lg-0">
                 <h1 class="h4">Tambah User</h1>
-                <p class="mb-0">Form untuk menambahkan data User baru.</p>
+                <p class="mb-0">Form untuk menambahkan data user baru.</p>
             </div>
             <div>
                 <a href="{{ route('user.index') }}" class="btn btn-primary"><i class="far fa-question-circle me-1"></i>
@@ -35,54 +35,66 @@
         <div class="col-12 mb-4">
             <div class="card border-0 shadow components-section">
                 <div class="card-body">
-                    <form action="{{ route('user.store') }}" method="POST">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>
+                                        {{ $error }}
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <Form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-4">
                             <div class="col-lg-4 col-sm-6">
-                                <!-- Name -->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="name">Name</label>
-                                            <input type="text" name="name" id="name"
-                                                class="form-control @error('name') is-invalid @enderror"
-                                                value="{{ old('name') }}" required>
-                                            @error('name')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!-- Email -->
-                                        <div class="form-group mb-3">
-                                            <label for="email">Email</label>
-                                            <input type="email" name="email" id="email"
-                                                class="form-control @error('email') is-invalid @enderror"
-                                                value="{{ old('email') }}" required>
-                                            @error('email')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <!-- Password -->
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="password">Password</label>
-                                            <input type="password" name="password" id="password"
-                                                class="form-control @error('password') is-invalid @enderror" required>
-                                            @error('password')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <!-- Confirm Password -->
-                                        <div class="form-group mb-3">
-                                            <label for="password_confirmation">Confirm Password</label>
-                                            <input type="password" name="password_confirmation" id="password_confirmation"
-                                                class="form-control" required>
-                                        </div>
-                                    </div>
+                                <!-- First Name -->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nama</label>
+                                    <input type="text" id="name" name="name" value="{{ old('name') }}"
+                                        class="form-control" required>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" id="email" name="email" value="{{ old('email') }}"
+                                        class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-sm-12">
+                                <!-- password -->
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" id="password" name="password" value="{{ old('password') }}"
+                                        class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+                                    <input type="password" id="password_confirmation" name="password_confirmation"
+                                        value="{{ old('password_confirmation') }}" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label>Pilih Role</label>
+                                    <select name="role" class="form-control" required>
+                                        <option value="">-- Pilih --</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Input Foto -->
+                                <div class="mb-3">
+                                    <label>Foto Profil</label>
+                                    <input type="file" name="avatar" class="form-control">
                                 </div>
 
                                 <!-- Buttons -->
-                                <div class="">
+                                <div class="mb-3">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                     <a href="{{ route('user.index') }}" class="btn btn-outline-secondary ms-2">Batal</a>
                                 </div>
@@ -94,4 +106,5 @@
             </div>
         </div>
     </div>
+
 @endsection
